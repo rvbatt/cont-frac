@@ -1,11 +1,11 @@
 CC=gcc
 
-lib: contFrac.h contFrac.c
+contFrac: contFrac.h contFrac.c stack
 	$(CC) -c -g contFrac.c
 
-testFrac: testContFrac.c lib
+testFrac: testContFrac.c contFrac stack
 	$(CC) -c -g testContFrac.c
-	$(CC) -o testContFrac contFrac.o testContFrac.o
+	$(CC) -o testContFrac contFrac.o testContFrac.o stack.o
 
 stack: stack.h stack.c
 	$(CC) -c -g stack.c

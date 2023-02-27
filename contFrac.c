@@ -4,14 +4,14 @@ contFrac* allocContFrac(unsigned short int numberOfSteps) {
 	int numberOfChars = 2 * (numberOfSteps + 1);
 
 	contFrac *fraction = malloc(sizeof(contFrac));
-	fraction->numbers = malloc(numberOfSteps * sizeof(unsigned int));
+	fraction->numbers = createStack();
 	fraction->representation = malloc(numberOfChars * sizeof(char));
 
 	return fraction;
 }
 
 void freeContFrac(contFrac *fraction) {
-	free(fraction->numbers);
+	freeStack(fraction->numbers);
 	free(fraction->representation);
 	free(fraction);
 }

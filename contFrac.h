@@ -3,19 +3,19 @@
 #include <stdbool.h>
 #include <math.h>
 #include <string.h>
+#include "stack.h"
 
 #define MAX_STEPS 20
 
 typedef struct cfrac {
 	bool negative;
-	unsigned int *numbers;
-	unsigned short int numberOfSteps;
+	Stack* numbers;
 	char *representation;
 } contFrac;
 
 contFrac* contFracFromNum(float realNumber);
-contFrac* ContFracFromStr(char *representation);
-contFrac* contFracFromFrac(int numerator, unsigned int denominator);
+contFrac* contFracFromStr(char *representation);
+contFrac* contFracFromFrac(int numerator, unsigned denominator);
 
 void freeContFrac(contFrac *fraction);
 
