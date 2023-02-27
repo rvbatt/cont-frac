@@ -1,8 +1,8 @@
-#include "stack.h"
+#include "../Stack/stack.h"
 
 void printStack(Stack* stack);
 
-void main() {
+int main(int argc, char* argv[]) {
 	Item numbers[] = {1,2,3};
 	Item popedNumber;
 	Stack* stack = createStack();
@@ -22,6 +22,8 @@ void main() {
 	printStack(stack);
 
 	freeStack(stack);
+
+	return 0;
 }
 
 void printStack(Stack* stack) {

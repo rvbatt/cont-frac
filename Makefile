@@ -1,20 +1,35 @@
-CC=gcc
+CC := gcc
+CFLAGS := -g -Wall -Werror
 
-contFrac: contFrac.h contFrac.c stack
-	$(CC) -c -g contFrac.c
+STACKDIR := ./Stack/
+OBJDIR := ./Objects/
+TESTDIR := ./Tests/
 
-testFrac: testContFrac.c contFrac stack
-	$(CC) -c -g testContFrac.c
-	$(CC) -o testContFrac contFrac.o testContFrac.o stack.o
+## Objects
 
-stack: stack.h stack.c
-	$(CC) -c -g stack.c
+$(OBJDIR)stack.o: $(STACKDIR)stack.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-testStack: testStack.c stack
-	$(CC) -c -g testStack.c
-	$(CC) -o testStack stack.o testStack.o
+$(OBJDIR)testStack.o: $(TESTDIR)testStack.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)contFrac.o: contFrac.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)testContFrac.o: $(TESTDIR)testStack.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+## Tests
+
+tests: $(TESTDIR)testStack $(TESTDIR)testContFrac
+
+$(TESTDIR)testStack: $(OBJDIR)testStack.o $(OBJDIR)stack.o
+	$(CC) $(CFLAGS) $^ -o $@
+
+$(TESTDIR)testContFrac: $(OBJDIR)testContFrac.o $(OBJDIR)stack.o
+	$(CC) $(CFLAGS) $^ -o $@
 
 .PHONY: clean
 
 clean:
-	rm *.o
+	rm -f $(OBJDIR)*
